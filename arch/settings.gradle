@@ -1,0 +1,8 @@
+include ':zdemo_s1_week5_fragment_recyclerview'
+include ':kotlin'
+rootProject.name='arch'
+include ':app'
+include ':hilibrary'
+include ':hiui'
+include ':aproject'
+include ':common'
