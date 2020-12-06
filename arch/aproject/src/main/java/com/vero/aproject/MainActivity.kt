@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.lifecycleScope
 import com.vero.aproject.databinding.ActivityMainBinding
 import com.vero.aproject.logic.MainActivityLogic
 import com.vero.arch.activity.BaseActivity
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), MainActivityLogic.ActivityProvider {
     private var activityLogic: MainActivityLogic? = null
