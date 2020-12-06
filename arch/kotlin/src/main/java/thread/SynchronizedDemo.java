@@ -21,6 +21,7 @@ public class SynchronizedDemo {
                 @Override
                 public void run() {
                     demo.printThreadName();
+//                    new SynchronizedTestDemo().printThreadName();
                 }
             }).start();
         }

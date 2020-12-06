@@ -36,7 +36,7 @@ class ReentrantLockDemo {
                 mReentrantLock.lock()
                 println("$name 又准备好了")
                 Thread.sleep(100)
-                println("$name 又买好了")
+                println("$name 又买好了---end")
             } finally {
                 //可重入锁，获取3次，就要释放3次
                 mReentrantLock.unlock()

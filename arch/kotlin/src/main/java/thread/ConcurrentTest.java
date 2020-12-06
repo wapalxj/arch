@@ -3,9 +3,11 @@ package thread;
 public class ConcurrentTest {
 
     final static Object object = new Object();
+
+    //原子变量，保证wait在notify之前执行，不然会卡死
     static volatile boolean hasNotify = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Thread thread1 = new Thread(new Runnable1());
         Thread thread2 = new Thread(new Runnable2());
@@ -15,6 +17,9 @@ public class ConcurrentTest {
 
         //join
 
+        thread1.join();
+        //thread1执行完后，这里才继续执行
+        System.out.println("thread-------main end");
 
     }
 

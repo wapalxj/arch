@@ -33,28 +33,30 @@ class ReentrantReadWriteLocDemo {
 
 
     fun read() {
+        val name = Thread.currentThread().name
         try {
             readLock.lock()
-            println("正在读取数据...")
+            println("线程$name 正在读取数据...")
             Thread.sleep(1000)
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
             readLock.unlock()
-            println("释放读锁...")
+            println("线程$name 释放读锁...")
         }
     }
 
     fun write() {
+        val name = Thread.currentThread().name
         try {
             writeLock.lock()
-            println("正在读写入数据...")
+            println("线程$name 正在读写入数据...")
             Thread.sleep(1000)
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
             writeLock.unlock()
-            println("释放写锁...")
+            println("线程$name 释放写锁...")
         }
     }
 }

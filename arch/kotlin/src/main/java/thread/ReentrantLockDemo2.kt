@@ -18,6 +18,9 @@ fun main() {
 
 class ReentrantLockDemo2 {
     internal class ReentrantLockTask {
+        //非公平锁
+//        val lock = ReentrantLock()
+        //公平锁
         val lock = ReentrantLock(true)
 
         fun print() {

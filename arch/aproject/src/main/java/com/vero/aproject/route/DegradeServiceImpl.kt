@@ -24,6 +24,7 @@ class DegradeServiceImpl : DegradeService {
         ARouter.getInstance()
             .build("/degrade/global/activity")
             .greenChannel()
+            .navigation()
     }
 
 }

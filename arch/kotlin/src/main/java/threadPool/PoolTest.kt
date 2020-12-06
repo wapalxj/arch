@@ -3,5 +3,7 @@ package threadPool
 import java.util.concurrent.ThreadPoolExecutor
 
 fun main() {
-    ThreadPoolExecutor
+
+//    val pool=ThreadPoolExecutor(10)
+//    pool.exe
 }

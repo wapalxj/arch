@@ -1,14 +1,17 @@
 package com.vero.aproject.route
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.Postcard
+import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
 import java.lang.RuntimeException
 
-@Route(path = "biz_interceptor")
+@Interceptor(name = "biz_interceptor",priority = 9)
 class BizInterceptor : IInterceptor {
     var context: Context? = null
 
@@ -17,6 +20,7 @@ class BizInterceptor : IInterceptor {
     }
 
 
+    //运行在子线程
     override fun process(postcard: Postcard?, callback: InterceptorCallback?) {
         postcard?.let {
             val flag = it.extra
@@ -44,7 +48,9 @@ class BizInterceptor : IInterceptor {
     }
 
     private fun showToast(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+        Handler(Looper.getMainLooper()).post {
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+        }
     }
 
 

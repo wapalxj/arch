@@ -8,11 +8,12 @@ public class HiApplication extends HiBaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        ARouter.init(this);
         if (BuildConfig.DEBUG) {
             ARouter.openLog();
             ARouter.openDebug();
         }
-        ARouter.init(this);
         ActivityManager.Companion.getInstance().init(this);
     }
 }
