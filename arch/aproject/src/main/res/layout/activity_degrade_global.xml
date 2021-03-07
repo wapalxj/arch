@@ -7,36 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".route.DegradeGlobalActivity"
-        tools:ignore="MissingConstraints">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45">
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:padding="13dp"
-                android:src="@mipmap/res_image_back" />
+        >
+        <com.vero.common.ui.view.IconFontTextView
+            android:id="@+id/action_back"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:text="@string/if_back_soild"
+            android:textSize="@dimen/sp_24"
+            android:gravity="center"
+            />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="错误提示"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_f1" />
 
         <com.vero.common.ui.view.EmptyView
             android:id="@+id/empty_view"

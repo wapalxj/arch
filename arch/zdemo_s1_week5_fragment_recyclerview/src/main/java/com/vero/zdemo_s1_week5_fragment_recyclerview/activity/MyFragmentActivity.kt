@@ -13,20 +13,20 @@ class MyFragmentActivity : BaseActivity<ActivityMyFragmentBinding>() {
     private val FIRST_FRAGMENT = "first_fragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val firstFragment = FirstFragment()
-//        //恢复导致重叠
-//        supportFragmentManager.beginTransaction()
-//            .add(R.id.container, firstFragment)
-//            .commitNow()
+        val firstFragment = FirstFragment()
+        //恢复导致重叠
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, firstFragment)
+            .commitNow()
 
-        //解决重叠
-        val fragment = supportFragmentManager.findFragmentByTag(FIRST_FRAGMENT)
-        if (fragment == null) {
-            val firstFragment = FirstFragment()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.container, firstFragment, FIRST_FRAGMENT)
-                .commitNow()
-        }
+//        //解决重叠
+//        val fragment = supportFragmentManager.findFragmentByTag(FIRST_FRAGMENT)
+//        if (fragment == null) {
+//            val firstFragment = FirstFragment()
+//            supportFragmentManager.beginTransaction()
+//                .add(R.id.container, firstFragment, FIRST_FRAGMENT)
+//                .commitNow()
+//        }
     }
 
     override fun getLayout(): Int {

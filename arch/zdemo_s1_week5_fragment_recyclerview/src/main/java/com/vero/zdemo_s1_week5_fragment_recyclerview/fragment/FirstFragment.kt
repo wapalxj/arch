@@ -1,6 +1,7 @@
 package com.vero.zdemo_s1_week5_fragment_recyclerview.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class FirstFragment : HiBaseFragment() {
 
         val textView = root?.findViewById<TextView>(R.id.tv)
         textView?.text = System.currentTimeMillis().toString()
+        Log.e("FirstFragment000",textView?.text?.toString())
         return root
     }
 }

@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
+import com.alibaba.android.arouter.launcher.ARouter
 import java.lang.RuntimeException
 
 @Interceptor(name = "biz_interceptor",priority = 9)
@@ -28,22 +29,29 @@ class BizInterceptor : IInterceptor {
                 flag and (RouteFlag.FLAG_LOGIN) != 0 -> {
                     //表明指定了FLAG_LOGIN
                     callback?.onInterrupt(RuntimeException("need login"))
-                    showToast("请先登录")
+                    loginIntercept()
                 }
-                flag and (RouteFlag.FLAG_AUTH) != 0 -> {
-                    //表明指定了FLAG_AUTH
-                    callback?.onInterrupt(RuntimeException("need authentication"))
-                    showToast("请先认证")
-                }
-                flag and (RouteFlag.FLAG_VIP) != 0 -> {
-                    //表明指定了FLAG_VIP
-                    callback?.onInterrupt(RuntimeException("need become vip"))
-                    showToast("请先加入会员")
-                }
+//                flag and (RouteFlag.FLAG_AUTH) != 0 -> {
+//                    //表明指定了FLAG_AUTH
+//                    callback?.onInterrupt(RuntimeException("need authentication"))
+//                    showToast("请先认证")
+//                }
+//                flag and (RouteFlag.FLAG_VIP) != 0 -> {
+//                    //表明指定了FLAG_VIP
+//                    callback?.onInterrupt(RuntimeException("need become vip"))
+//                    showToast("请先加入会员")
+//                }
                 else -> {
                     callback?.onContinue(postcard)
                 }
             }
+        }
+    }
+
+    private fun loginIntercept(){
+        Handler(Looper.getMainLooper()).post {
+            showToast("请先登录")
+            ARouter.getInstance().build("/account/login")
         }
     }
 

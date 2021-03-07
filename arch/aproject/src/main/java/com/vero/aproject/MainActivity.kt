@@ -1,22 +1,27 @@
 package com.vero.aproject
 
 import android.content.Intent
-import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.lifecycleScope
+import com.alibaba.android.arouter.launcher.ARouter
+import com.google.gson.JsonObject
+import com.vero.aproject.biz.LoginActivity
 import com.vero.aproject.databinding.ActivityMainBinding
+import com.vero.aproject.http.ApiFactory
+import com.vero.aproject.http.api.AccountApi
 import com.vero.aproject.logic.MainActivityLogic
 import com.vero.arch.activity.BaseActivity
-import kotlinx.coroutines.launch
+import com.vero.hilibrary.log.HiLog
+import com.vero.hilibrary.restful.HiCallback
+import com.vero.hilibrary.restful.HiResponse
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), MainActivityLogic.ActivityProvider {
     private var activityLogic: MainActivityLogic? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityLogic = MainActivityLogic(this,savedInstanceState,mBinding)
+
+        ARouter.getInstance().build("/account/login")
+                .navigation()
     }
 
     override fun getLayout(): Int {
@@ -26,5 +31,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainActivityLogic.Acti
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         activityLogic?.onSaveInstanceState(outState)
+
+
+
     }
 }

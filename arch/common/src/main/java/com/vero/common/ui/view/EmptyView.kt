@@ -1,10 +1,7 @@
 package com.vero.common.ui.view
 
 import android.content.Context
-import android.graphics.Typeface
-import android.text.TextUtils
 import android.util.AttributeSet
-import android.util.TimeUtils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +14,13 @@ import com.vero.common.R
  * 空页面
  */
 class EmptyView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
     private var icon: TextView? = null
     private var title: TextView? = null
-    private var button: TextView? = null
+    private var desc: TextView? = null
+    private var empty_action: TextView? = null
+    private var empty_tips: TextView? = null
 
 
     init {
@@ -30,11 +29,10 @@ class EmptyView @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.layout_empty_view, this, true)
 
         icon = findViewById(R.id.empty_icon)
-        title = findViewById(R.id.empty_text)
-        button = findViewById(R.id.empty_action)
-
-        var typeface: Typeface = Typeface.createFromAsset(context.assets, "fonts/iconfont.ttf")
-        icon?.typeface = typeface
+        desc = findViewById(R.id.empty_text)
+        title = findViewById(R.id.empty_title)
+        empty_action = findViewById(R.id.empty_action)
+        empty_tips = findViewById(R.id.empty_tips)
     }
 
     fun setIcon(@StringRes iconRes: Int) {
@@ -43,16 +41,31 @@ class EmptyView @JvmOverloads constructor(
 
     fun setTitle(text: String) {
         title?.text = text
-        title?.visibility = if (TextUtils.isDigitsOnly(text)) View.GONE else View.VISIBLE
+        title?.visibility = if (text.isNullOrBlank()) View.GONE else View.VISIBLE
     }
+
+    fun setDesc(text: String) {
+        desc?.text = text
+        desc?.visibility = if (text.isNullOrBlank()) View.GONE else View.VISIBLE
+    }
+
+    fun setHelpAction(actonId: Int = R.string.if_detail, listener: OnClickListener) {
+        empty_tips?.setText(actonId)
+        empty_tips?.setOnClickListener(listener)
+        empty_tips?.visibility = View.VISIBLE
+        if (actonId == -1) {
+            empty_tips?.visibility = View.GONE
+        }
+    }
+
 
     fun setButton(text: String, listener: OnClickListener) {
         if (text.isNullOrBlank()) {
-            button?.visibility=View.GONE
-        }else{
-            button?.visibility=View.VISIBLE
-            button?.text = text
-            button?.setOnClickListener { listener }
+            empty_action?.visibility = View.GONE
+        } else {
+            empty_action?.visibility = View.VISIBLE
+            empty_action?.text = text
+            empty_action?.setOnClickListener { listener }
 
         }
 
