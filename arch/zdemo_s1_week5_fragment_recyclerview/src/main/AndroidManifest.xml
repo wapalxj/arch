@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.RecyclerViewActivity"></activity>
         <activity android:name=".activity.LazyFragmentActivity" />
+        <activity android:name=".activity.LazyVpFragmentActivity" />
         <activity android:name=".activity.MyFragmentActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

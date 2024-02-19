@@ -6,13 +6,14 @@ object CoroutinesScene {
     @JvmStatic
     fun main(args: Array<String>) {
         startScene1()
+        Thread.sleep(10000)
     }
 
     /**
      * 依次启动3个子线程，并且同步的方式拿到返回值
      */
     fun startScene1() {
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.IO) {
             //此处运行的线程，即为上面方法参数指定的
             println("Coroutine start")
             val res1 = request1()

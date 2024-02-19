@@ -22,10 +22,13 @@ open class HiResponse<T> {
     }
 
 
-
     var rawData: String? = null//原始数据
     var code = 0//业务code
     var data: T? = null//业务数据
     var errorData: Map<String, String>? = null//错误状态下的数据
     var msg: String? = null//错误信息
+
+    fun success(): Boolean {
+        return code == SUCCESS
+    }
 }

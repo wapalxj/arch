@@ -7,7 +7,7 @@ import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-class MethodParser(var baseUrl: String, method: Method, args: Array<Any>) {
+class MethodParser(var baseUrl: String, method: Method) {
     //方法的泛型返回类型
     var returnType: Type? = null
     var relativeUrl: String? = null
@@ -27,7 +27,7 @@ class MethodParser(var baseUrl: String, method: Method, args: Array<Any>) {
 
         //parse path,filed
         //解析入参以及其注解
-        parseMethodParameters(method, args)
+//        parseMethodParameters(method, args)
 
         //genric return type
         //解析泛型返回类型
@@ -71,6 +71,8 @@ class MethodParser(var baseUrl: String, method: Method, args: Array<Any>) {
     }
 
     private fun parseMethodParameters(method: Method, args: Array<Any>) {
+        //每次调用api接口时  应该吧上一次解析到的参数清理掉，因为methodParser存在复用
+        parameters.clear()
         //@Path("province") province :Int
         //异常情况，注解数和参数数不一致
 
@@ -194,7 +196,10 @@ class MethodParser(var baseUrl: String, method: Method, args: Array<Any>) {
         }
     }
 
-    fun newRequest(): HiRequest {
+    fun newRequest(method: Method, args: Array<out Any>?): HiRequest {
+        val arguments = args as Array<Any>? ?: arrayOf()
+        parseMethodParameters(method, arguments)
+
         var request = HiRequest()
         request.let {
             it.domainUrl = domainUrl
@@ -211,8 +216,8 @@ class MethodParser(var baseUrl: String, method: Method, args: Array<Any>) {
     }
 
     companion object {
-        fun parse(baseUrl: String, method: Method, args: Array<Any>): MethodParser {
-            return MethodParser(baseUrl, method, args)
+        fun parse(baseUrl: String, method: Method): MethodParser {
+            return MethodParser(baseUrl, method)
         }
     }
 }

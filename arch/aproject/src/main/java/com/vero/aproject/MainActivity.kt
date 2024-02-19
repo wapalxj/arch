@@ -18,10 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainActivityLogic.Acti
     private var activityLogic: MainActivityLogic? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityLogic = MainActivityLogic(this,savedInstanceState,mBinding)
-
-        ARouter.getInstance().build("/account/login")
-                .navigation()
+        activityLogic = MainActivityLogic(this, savedInstanceState, mBinding)
     }
 
     override fun getLayout(): Int {
@@ -31,8 +28,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainActivityLogic.Acti
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         activityLogic?.onSaveInstanceState(outState)
+    }
 
-
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val fragments = supportFragmentManager.fragments
+        fragments.forEach {
+            it.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.vero.common.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.vero.hilibrary.util.AppGlobals
 
 object SPUtils {
     val CACHE_FILE = "cache_file"

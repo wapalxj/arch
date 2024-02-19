@@ -14,4 +14,15 @@
 
     <string name="register_success">注册成功</string>
     <string name="register_failed">注册失败</string>
+    <string name="profile_login_desc_welcome_back">hi,欢迎回来</string>
+    <string name="item_notify">课程公告</string>
+    <string name="item_collection">我的收藏</string>
+    <string name="item_address">收货地址</string>
+    <string name="item_history">浏览历史</string>
+    <string name="profile_not_login">请先登录</string>
+
+    <string name="profile_tab_item_collection">\n收藏</string>
+    <string name="profile_tab_item_history">\n浏览历史</string>
+    <string name="profile_tab_item_learn">\n学习时长</string>
+    <string name="home_search_hint">&#xe987; 搜索你想要的商品</string>
 </resources>

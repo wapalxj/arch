@@ -136,7 +136,7 @@ public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
         //2.添加头部线
         addBottomLine();
 
-        //3.添加tab
+        //3.添加tabs
         addView(ll, flParams);
 
         //修复内容区域底部的Padding

@@ -1,4 +1,4 @@
-package com.vero.common.utils
+package com.vero.hilibrary.util
 
 import android.app.Application
 import java.lang.Exception

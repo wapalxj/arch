@@ -1,5 +1,6 @@
 package com.vero.hilibrary.restful
 
+import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.ConcurrentHashMap
@@ -26,21 +27,21 @@ class HiRestful constructor(val baseUrl: String, val callFactory: HiCall.Factory
     fun <T> create(service: Class<T>): T {
         return Proxy.newProxyInstance(
             service.classLoader,
-            arrayOf<Class<*>>(service)
-        ) { proxy, method, args ->
-
-            var methodParser = methodService[method]
-            if (methodParser == null) {
-                //解析method
-                methodParser = MethodParser.parse(baseUrl, method, args)
-                methodService[method] = methodParser
-            }
-            //创建HiCall
-            val request = methodParser.newRequest()
-//            callFactory.newCall(request)
-            //使用代理创建Call，因为需要派发拦截器
-            scheduler.newCall(request)
-        } as T
+            arrayOf<Class<*>>(service), object : InvocationHandler {
+                override fun invoke(proxy: Any, method: Method, args: Array<out Any>?): Any {
+                    var methodParser = methodService[method]
+                    if (methodParser == null) {
+                        //解析method
+                        methodParser = MethodParser.parse(baseUrl, method)
+                        methodService[method] = methodParser
+                    }
+                    //创建HiCall
+                    val request = methodParser.newRequest(method, args)
+                    //  callFactory.newCall(request)
+                    //使用代理创建Call，因为需要派发拦截器
+                    return scheduler.newCall(request)
+                }
+            }) as T
     }
 
 }

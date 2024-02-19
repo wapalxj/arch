@@ -14,7 +14,7 @@ object CoroutinesScene {
      */
     fun startScene1() {
         
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.Default) {
             //此处运行的线程，即为上面方法参数指定的
             println("Coroutine start")
             val res1 = request1()
